@@ -1,6 +1,6 @@
 # Static Site Generator
 
-A small static site generator in Python, standard library only. You write pages in Markdown, run it, and get plain HTML you can drop on GitHub Pages.
+A small static site generator in Python. You write pages in Markdown, run it, and get plain HTML you can drop on GitHub Pages.
 
 Building it to understand how Hugo and Jekyll actually work instead of just using them.
 
