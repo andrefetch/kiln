@@ -1,4 +1,4 @@
-from src.textnode import TextNode, TextType
+from src.nodes.textnode import TextNode, TextType
 
 
 def split_nodes_delimiter(
