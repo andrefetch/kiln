@@ -1,3 +1,4 @@
+from src.markdown.extract_markdown import extract_markdown_images, extract_markdown_links
 from src.nodes.textnode import TextNode, TextType
 
 
@@ -30,5 +31,83 @@ def split_nodes_delimiter(
                     node_type = text_type
 
                 new_nodes.append(TextNode(part, node_type))
+
+    return new_nodes
+
+def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
+
+    new_nodes: list[TextNode] = []
+
+    for node in old_nodes:
+        if node.text_type != TextType.TEXT:
+            new_nodes.append(node)
+        else:
+            images = extract_markdown_images(node.text)
+
+            remaining_text = node.text
+
+            for alt, url in images: #unpacks the tuple present after extracting the md images
+                sections = remaining_text.split(f"![{alt}]({url})", 1)
+
+                if sections[0]:
+                    new_nodes.append(TextNode(
+                        sections[0],
+                        TextType.TEXT
+                    ))
+
+                new_nodes.append(TextNode(
+                    alt,
+                    TextType.IMAGE,
+                    url
+                ))
+
+                remaining_text = sections[1]
+
+            if remaining_text:
+                new_nodes.append(TextNode(
+                    remaining_text,
+                    TextType.TEXT
+                ))
+
+    return new_nodes
+
+def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
+
+    new_nodes: list[TextNode] = []
+
+    for node in old_nodes:
+        if node.text_type != TextType.TEXT:
+            new_nodes.append(node)
+        else:
+            links = extract_markdown_links(node.text)
+            remaining_text = node.text
+
+            for text, url in links:
+
+                sections = remaining_text.split(f"[{text}]({url})", 1)
+
+                if sections[0]:
+                    new_nodes.append(TextNode(
+                        sections[0],
+                        TextType.TEXT
+                    ))
+
+                new_nodes.append(
+                    TextNode(
+                        text,
+                        TextType.LINK,
+                        url
+                    )
+                )
+
+                remaining_text = sections[1]
+
+            if remaining_text:
+                new_nodes.append(
+                    TextNode(
+                        remaining_text,
+                        TextType.TEXT
+                    )
+                )
 
     return new_nodes
