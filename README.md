@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/kiln.png" alt="Kiln" width="600">
+  <img src="assets/new_kiln.png" alt="Kiln" width="600">
 </p>
 
 # Kiln, A Static Site Generator
