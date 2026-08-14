@@ -7,7 +7,7 @@ from src.nodes.htmlnode import LeafNode
 
 class TextType(Enum):
 
-    TEXT = 'text'
+    TEXT = 'text' # plain
     BOLD = 'bold' # **Bold**
     ITALIC = 'italic' # _Italic_
     CODE = 'code' # `code`
