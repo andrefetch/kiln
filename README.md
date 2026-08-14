@@ -16,8 +16,6 @@ gets split into typed nodes that each know how to render themselves as HTML. Bol
 
 ## Rendering is recursive
 
-Something like `[link](https://example.com)` is really two things — the text you see and the URL behind it. The URL gets stored on the node and comes back out as an attribute (`href`, or `src` and `alt` for images) when it renders.
-
 The rendering itself is recursive. A parent node just asks each of its children to render themselves:
 
 ```python
