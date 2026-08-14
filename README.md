@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/kiln.png" alt="Kiln" width="600">
+</p>
+
 # Kiln, A Static Site Generator
 
 A small static site generator in Python. You write pages in Markdown, run it, and get plain HTML you can drop on GitHub Pages.
