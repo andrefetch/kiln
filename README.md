@@ -27,7 +27,7 @@ for child in self.children:
     result += child.to_html()
 ```
 
-If a child is another parent, it does the same thing to its own children. Leaf nodes have no children, so they return their string and it stops there. One call at the top renders the whole tree, however deep it goes.
+If a child is another parent, it does the same thing to its own children. Leaf nodes have no children, so they return their string and it stops there. One call at the top renders the whole tree, however deep it goes
 
 ### Next Up
 Currently still following the project on [boot.dev!](https://www.boot.dev/courses/build-static-site-generator-python). Mainly what is needed next is to render `-` into list HTML attributes and numbered items into ordered lists.
