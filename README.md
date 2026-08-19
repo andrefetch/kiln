@@ -20,7 +20,7 @@ gets split into typed nodes that each know how to render themselves as HTML. Bol
 
 ## Rendering is recursive
 
-The rendering itself is recursive. A parent node just asks each of its children to render themselves:
+The rendering itself is recursive. A parent node just asks each of its children to render themselves.
 
 ```python
 for child in self.children:
