@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from src.markdown.block_markdown import markdown_to_html_node
 
@@ -34,7 +35,7 @@ def extract_title(markdown: str) -> str:
         "There must be an <h1> tag"
     )
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath="/"):
 
     if os.path.isdir(from_path):
 
@@ -44,10 +45,10 @@ def generate_page(from_path, template_path, dest_path):
             dstfull_path = os.path.join(dest_path, item)
 
             if os.path.isdir(srcfull_path):
-                generate_page(srcfull_path, template_path, dstfull_path)
+                generate_page(srcfull_path, template_path, dstfull_path, basepath)
 
             elif item.endswith(".md"):
-                generate_page(srcfull_path, template_path, dstfull_path[:-3] + ".html")
+                generate_page(srcfull_path, template_path, dstfull_path[:-3] + ".html", basepath)
 
         return
 
@@ -65,6 +66,9 @@ def generate_page(from_path, template_path, dest_path):
     replaced_title = template_path_content.replace("{{ Title }}", extracted_title)
     replaced_content = replaced_title.replace("{{ Content }}", html_string)
 
+    replaced_content = replaced_content.replace('href="/', f'href="{basepath}')
+    replaced_content = replaced_content.replace('src="/', f'src="{basepath}')
+
     dir_name = os.path.dirname(dest_path)
     os.makedirs(dir_name, exist_ok=True)
 
@@ -75,11 +79,13 @@ def generate_page(from_path, template_path, dest_path):
 
 def main():
 
-    if os.path.exists("public"):
-        shutil.rmtree("public")
+    basepath = sys.argv[1] if len(sys.argv) > 1 else "/"
 
-    copy_dir("static", "public")
-    generate_page("content", "template.html", "public")
+    if os.path.exists("docs"):
+        shutil.rmtree("docs")
+
+    copy_dir("static", "docs")
+    generate_page("content", "template.html", "docs", basepath)
 
 if __name__ == "__main__":
 
