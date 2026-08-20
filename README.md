@@ -61,4 +61,3 @@ Page generation works the same way: `generate_page()` walks `content/` and recur
 
 The [boot.dev project](https://www.boot.dev/courses/build-static-site-generator-python) is complete: full inline and block parsing, recursive page generation, static asset copying, and a deployed site.
 
-Next up is making it usable by other people, config for paths and basepath instead of hardcoding them, and a nicer default template.
