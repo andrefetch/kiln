@@ -52,7 +52,7 @@ class LeafNode(HTMLNode):
         super().__init__(
             tag=tag,
             value=value,
-            props=None,
+            props=props,
         )
 
     def to_html(self) -> str:
@@ -103,4 +103,4 @@ class ParentNode(HTMLNode):
             for child in self.children:
                 result += child.to_html()
 
-            return f"<{self.tag}>{result}</{self.tag}>"
+            return f"<{self.tag}{self.props_to_html()}>{result}</{self.tag}>"
